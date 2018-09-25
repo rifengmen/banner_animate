@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner</title>
+    <link rel="stylesheet" href="./index.css">
+    <!--<script src="index.js"></script>-->
+    <script src="../xiaomi/js/animate.js"></script>
+</head>
+<body>
+
+
+<div class="banner">
+    <div class="imgs">
+        <a href="#">
+            <img src="../xiaomi/img/main-banner-1.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="../xiaomi/img/main-banner-2.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="../xiaomi/img/main-banner-3.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="../xiaomi/img/main-banner-4.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="../xiaomi/img/main-banner-5.jpg" alt="">
+        </a>
+    </div>
+    <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <button class="left">左</button>
+    <button class="right">右</button>
+</div>
+<script src="../jquery/jquery-3.3.1.min.js"></script>
+<script>
+
+    let widths = $(".banner").width();
+    let now = 0;
+    let next = 0;
+    $("a").eq(0).css("left",0);
+    $("span").eq(0).css("background","#fff");
+    let t = setInterval(moveR,1500);
+    function moveR() {
+        next++;
+        if (next === $("a").length) {
+            next = 0;
+        };
+        $("a").eq(now).css("left",0);
+        $("a").eq(next).css("left",widths);
+        $("a").eq(now).animate({"left":-widths});
+        $("a").eq(next).animate({"left":0});
+        $("span").eq(next).css("background","#fff").siblings().css("background","#757575");
+        now  = next;
+    }
+    function moveL() {
+        next--;
+        if (next === -1) {
+            next = $("a").length-1;
+        };
+        $("a").eq(now).css("left",0);
+        $("a").eq(next).css("left",-widths);
+        $("a").eq(now).animate({"left":widths});
+        $("a").eq(next).animate({"left":0});
+        $("span").eq(next).css("background","#fff").siblings().css("background","#757575");
+        now  = next;
+    }
+    $(".banner").mouseover(function () {
+        clearInterval(t);
+    });
+    $(".banner").mouseout(function () {
+        t = setInterval(moveR,1500);
+    });
+    $("span").click(function () {
+        $(this).css("background","#fff").siblings().css("background","#757575");
+        $("a").eq($(this).index()).css({"left":0}).siblings().css({"left":widths});
+        now = $(this).index();
+        next = $(this).index();
+    })
+    $(".right").click(function () {
+        moveR();
+    });
+    $(".left").click(function () {
+        moveL();
+    })
+
+</script>
+
+</body>
+</html>
