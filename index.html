@@ -38,25 +38,24 @@
     <button class="left">左</button>
     <button class="right">右</button>
 </div>
-<script src="../jquery/jquery-3.3.1.min.js"></script>
+<script src="../jquery-3.3.1/jquery-3.3.1.min.js"></script>
 <script>
 
     let widths = $(".banner").width();
     let now = 0;
     let next = 0;
     $("a").eq(0).css("left",0);
-    $("span").eq(0).css("background","#fff");
+    $("span").eq(0).addClass("active");
     let t = setInterval(moveR,1500);
     function moveR() {
         next++;
         if (next === $("a").length) {
             next = 0;
         };
-        $("a").eq(now).css("left",0);
         $("a").eq(next).css("left",widths);
         $("a").eq(now).animate({"left":-widths});
         $("a").eq(next).animate({"left":0});
-        $("span").eq(next).css("background","#fff").siblings().css("background","#757575");
+        $("span").eq(next).addClass("active").siblings().removeClass("active");
         now  = next;
     }
     function moveL() {
@@ -64,11 +63,10 @@
         if (next === -1) {
             next = $("a").length-1;
         };
-        $("a").eq(now).css("left",0);
         $("a").eq(next).css("left",-widths);
         $("a").eq(now).animate({"left":widths});
         $("a").eq(next).animate({"left":0});
-        $("span").eq(next).css("background","#fff").siblings().css("background","#757575");
+        $("span").eq(next).addClass("active").siblings().removeClass("active");
         now  = next;
     }
     $(".banner").mouseover(function () {
@@ -78,7 +76,7 @@
         t = setInterval(moveR,1500);
     });
     $("span").click(function () {
-        $(this).css("background","#fff").siblings().css("background","#757575");
+        $(this).addClass("active").siblings().removeClass("active");
         $("a").eq($(this).index()).css({"left":0}).siblings().css({"left":widths});
         now = $(this).index();
         next = $(this).index();
@@ -88,6 +86,12 @@
     });
     $(".left").click(function () {
         moveL();
+    })
+    $(window).focus(function () {
+        clearInterval(t);
+    });
+    $(window).blur(function () {
+        t = setInterval(moveR,1500);
     })
 
 </script>

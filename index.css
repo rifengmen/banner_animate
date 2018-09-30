@@ -8,7 +8,7 @@
     width: 1226px;
     height: 460px;
     margin: 100px auto;
-    background-color: #fff;
+    background: #fff;
     position: relative;
     overflow: hidden;
 }
@@ -43,11 +43,11 @@ img {
     width: 10px;
     height: 10px;
     border: 2px solid #fff;
-    background-color: #757575;
+    background: #757575;
     border-radius: 50%;
 }
-.active {
-    backgroundColor: #fff;
+.dots span.active {
+    background: #fff;
     border: 2px solid #ff6700;
 }
 button {
@@ -57,7 +57,7 @@ button {
     position: absolute;
     top: 50%;
     margin-top: -40px;
-    background-color: #757575;
+    background: #757575;
     cursor: pointer;
 }
 .left {
